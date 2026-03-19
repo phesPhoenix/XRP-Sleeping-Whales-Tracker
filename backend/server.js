@@ -8,7 +8,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
-const XRPL_WS = "wss://xrplcluster.com";
+const XRPL_WS = "wss://s1.ripple.com";
 const DROPS_PER_XRP = 1_000_000;
 const MIN_DORMANCY_YEARS = 5;
 const MIN_DORMANCY_SECONDS = MIN_DORMANCY_YEARS * 365.25 * 24 * 3600;
