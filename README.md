@@ -34,17 +34,4 @@ Each event shows:
 
 New events flash green briefly when they arrive via SSE (Server-Sent Events) — no polling, fully live.
 
----
 
-## Deploying
-
-**Backend** → Railway, Render, or Fly.io (needs persistent WebSocket connection)
-**Frontend** → Vercel or Netlify (static build: `npm run build`)
-
-For production, set `VITE_API_URL` in the frontend to point to your deployed backend URL, and update the `API` constant in `App.jsx`.
-
----
-
-## Expanding later
-
-The backend is modular — adding ETF flow monitoring or ODL corridor tracking means adding new polling loops in `server.js` and new sections in `App.jsx`. The SSE broadcast system already handles multiple event types.
