@@ -14,27 +14,7 @@ xrpl-whale-site/
 
 ---
 
-## Running locally
 
-### 1. Backend
-```bash
-cd backend
-npm install
-node server.js
-# Runs on http://localhost:3001
-```
-
-### 2. Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-# Runs on http://localhost:3000
-```
-
-Open http://localhost:3000 — the frontend proxies `/api` requests to the backend automatically.
-
----
 
 ## What it shows
 
