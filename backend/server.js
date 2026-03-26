@@ -10,7 +10,7 @@ app.use(cors());
 const PORT = process.env.PORT || 3001;
 const XRPL_WS = "wss://s1.ripple.com";
 const DROPS_PER_XRP = 1_000_000;
-const THRESHOLD_XRP = 1_000_000;
+const THRESHOLD_XRP = 10_000_000;
 const MAX_EVENTS = 50;
 
 const KNOWN = {
@@ -42,7 +42,6 @@ function broadcast(data) {
   }
 }
 
-// ── Price polling ─────────────────────────────────────────────────────────────
 async function fetchPrice() {
   try {
     const r = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd");
@@ -58,7 +57,6 @@ async function fetchPrice() {
 setInterval(fetchPrice, 60_000);
 fetchPrice();
 
-// ── XRPL ─────────────────────────────────────────────────────────────────────
 let ws;
 let reconnectTimeout;
 
@@ -122,7 +120,6 @@ function handle(msg) {
 
 connect();
 
-// ── API ───────────────────────────────────────────────────────────────────────
 app.get("/api/init", (_, res) => {
   res.json({ events, price, priceHistory, connected: wsConnected });
 });
