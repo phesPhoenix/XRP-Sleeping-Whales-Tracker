@@ -104,6 +104,7 @@ function handle(msg) {
   const xrp = parseInt(tx.Amount) / DROPS_PER_XRP;
   if (xrp < THRESHOLD_XRP) return;
   if (ESCROW_BLACKLIST.has(tx.Account)) return;  
+  if (xrp > 500_000_000) return;
 
 
   const usd = price ? Math.round(xrp * price).toLocaleString() : null;
