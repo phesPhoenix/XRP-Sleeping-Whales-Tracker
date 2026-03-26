@@ -11,6 +11,13 @@ const PORT = process.env.PORT || 3001;
 const XRPL_WS = "wss://s1.ripple.com";
 const DROPS_PER_XRP = 1_000_000;
 const THRESHOLD_XRP = 10_000_000;
+const ESCROW_BLACKLIST = new Set([
+  "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+  "rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY",
+  "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+  "rN7n3473SaZBCG4dFL83w7PB5Nd8HPKZND",
+  "rBSWZVHkBBNnNjMwUGMsYLTpYQMRyGHSAJ",
+]);
 const MAX_EVENTS = 50;
 
 const KNOWN = {
@@ -96,6 +103,8 @@ function handle(msg) {
 
   const xrp = parseInt(tx.Amount) / DROPS_PER_XRP;
   if (xrp < THRESHOLD_XRP) return;
+  if (ESCROW_BLACKLIST.has(tx.Account)) return;  
+
 
   const usd = price ? Math.round(xrp * price).toLocaleString() : null;
 
